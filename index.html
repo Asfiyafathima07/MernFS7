@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Higher Order Function Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding-top: 50px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+    .links {
+      margin-top: 40px;
+    }
+    .links a {
+      display: block;
+      margin: 5px;
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .links a:hover {
+      color: #004d99;
+    }
+  </style>
+</head>
+<body>
+  <h1>Higher-Order Function Examples</h1>
+  <button onclick="runCallback()">Use Function as Argument</button>
+  <button onclick="runReturnFunction()">Function Returning Function</button>
+  <button onclick="runArrayOps()">map/filter/reduce</button>
+  <div id="output"></div>
+  <div class="links">
+    <a href="anonymous.html">anonymous.html</a>
+    <a href="arrow.html">arrow.html</a>
+    <a href="iife.html">iife.html</a>
+  </div>
+  <script>
+    function greet(name) {
+      return "Hello, " + name + "!";
+    }
+    function useCallback(callback) {
+      return callback("Asfiya");
+    }
+    function runCallback() {
+      document.getElementById("output").innerText = useCallback(greet);
+    }
+    function multiplyBy(factor) {
+      return function(num) {
+        return num * factor;
+      };
+    }
+    function runReturnFunction() {
+      let double = multiplyBy(2);
+      let result = "5 x 2 = " + double(5);
+      document.getElementById("output").innerText = result;
+    }
+    function runArrayOps() {
+      const nums = [1, 2, 3, 4, 5];
+      const squared = nums.map(n => n * n);
+      const evens = nums.filter(n => n % 2 === 0);
+      const total = nums.reduce((sum, n) => sum + n, 0);
+      document.getElementById("output").innerHTML = `
+        Numbers: [${nums}]<br>
+        Squares (map): [${squared}]<br>
+        Even Numbers (filter): [${evens}]<br>
+        Sum (reduce): ${total}
+      `;
+    }
+  </script>
+</body>
+</html>
